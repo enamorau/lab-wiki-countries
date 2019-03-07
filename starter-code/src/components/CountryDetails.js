@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-//import './App.css';
 
-import CountryDetails from "./components/CountryDetails.js"
-
-class App extends Component {
+class CountryDetails extends Component {
   render() {
     return (
-      <div className="App">
-       <CountryDetails />
-      </div>
+      <h1>hello wordl</h1>
     );
   }
 }
 
-export default App;
+export default CountryDetails;
