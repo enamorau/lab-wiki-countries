@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import { Link, Switch, Route } from "react-router-dom";
 
+import countrylist from "./countries.json";
+
 import CountryDetails from "./components/CountryDetails.js";
 
 class App extends Component {
@@ -18,35 +20,32 @@ class App extends Component {
 
         <div className="container">
           <div className="row">
-
             <div
               className="col-5"
               style={{ maxHeight: "90vh", overflow: "scroll" }}
             >
-              <div className="list-group">
-                <Link className="list-group-item list-group-item-action" to="/">
-                  🇿🇼 Zimbabwe
-                </Link>
-                <Link className="list-group-item list-group-item-action" to="/">
-                  🇿🇼 Zimbabwe
-                </Link>
-                <Link className="list-group-item list-group-item-action" to="/">
-                  🇿🇼 Zimbabwe
-                </Link>
-                <Link className="list-group-item list-group-item-action" to="/">
-                  🇿🇼 Zimbabwe
-                </Link>
-              </div>
+               {countrylist.map((eachCountry, index) => {
+                return (
+                  <div key={eachCountry.cca3} className="list-group">
+                    <Link
+                      className="list-group-item list-group-item-action"
+                      to={`/${eachCountry.cca3}`}
+                    >
+                      {eachCountry.flag + eachCountry.name.official}
+                    </Link>
+                  </div>
+                );
+              })} 
             </div>
 
             <div class="col-7">
-              <CountryDetails/>
+              <CountryDetails />
             </div>
           </div>
         </div>
 
         <Switch>
-          <Route exact path="/" component={App} />
+         {/*  <Route exact path="/" component={App} /> */}
         </Switch>
       </div>
     );
