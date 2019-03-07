@@ -1,23 +1,33 @@
 import React, { Component } from "react";
+import countrylist from "../countries.json";
 
 import { Link } from "react-router-dom";
 
 class CountryDetails extends Component {
+
   render() {
+    console.log('mes props', this.props);
+    const getCountry = (code) => {
+      return countrylist.find((oneCountry) => oneCountry.cca3 === code)
+    }
+    
+    const {params} = this.props.match;
+    const foundcountry = getCountry(params.cca3);
+
     return (
       <div className= 'CountryDetails'>
-        <h1>France</h1>
+        <h1>{foundcountry.name.common}</h1>
         <table className="table">
           <thead />
           <tbody>
             <tr>
               <td style={{ width: "30%" }}>Capital</td>
-              <td>Paris</td>
+              <td>{foundcountry.capital}</td>
             </tr>
             <tr>
               <td>Area</td>
               <td>
-                551695 km
+              {foundcountry.area} km
                 <sup>2</sup>
               </td>
             </tr>
@@ -25,30 +35,19 @@ class CountryDetails extends Component {
               <td>Borders</td>
               <td>
                 <ul>
-                  <li>
-                    <a href="/AND">Andorra</a>
-                  </li>
-                  <li>
-                    <a href="/BEL">Belgium</a>
-                  </li>
-                  <li>
-                    <a href="/DEU">Germany</a>
-                  </li>
-                  <li>
-                    <a href="/ITA">Italy</a>
-                  </li>
-                  <li>
-                    <a href="/LUX">Luxembourg</a>
-                  </li>
-                  <li>
-                    <a href="/MCO">Monaco</a>
-                  </li>
-                  <li>
-                    <a href="/ESP">Spain</a>
-                  </li>
-                  <li>
-                    <a href="/CHE">Switzerland</a>
-                  </li>
+                {foundcountry.borders.map((eachCountry, index) => {
+                return (
+                  <div key={eachCountry.cca3} className="list-group">
+                    <Link
+                      className="list-group-item list-group-item-action"
+                      to={`/${eachCountry}`}
+                    >
+                      {getCountry(eachCountry).flag}{getCountry(eachCountry).name.common}
+          
+                    </Link>
+                  </div>
+                );
+              })}
                 </ul>
               </td>
             </tr>

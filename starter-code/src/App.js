@@ -31,7 +31,7 @@ class App extends Component {
                       className="list-group-item list-group-item-action"
                       to={`/${eachCountry.cca3}`}
                     >
-                      {eachCountry.flag + eachCountry.name.official}
+                      {eachCountry.flag + eachCountry.name.common}
                     </Link>
                   </div>
                 );
@@ -39,14 +39,19 @@ class App extends Component {
             </div>
 
             <div class="col-7">
-              <CountryDetails />
+              <Switch>
+                <Route exact path="/" render={() => {
+                  return (
+                    <p>Clique sur un pays à gauche</p>
+                  );
+                }} />
+                <Route path="/:cca3" component={CountryDetails}/>
+              </Switch>
             </div>
           </div>
         </div>
 
-        <Switch>
-         {/*  <Route exact path="/" component={App} /> */}
-        </Switch>
+        
       </div>
     );
   }
